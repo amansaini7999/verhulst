@@ -293,7 +293,7 @@ def hosmer_lemeshow_test(y_true, y_pred, n_groups=10):
     C_hat = np.sum(num / den)
 
     df = len(table) - 2
-    p = scipy.stats.chisqprob(C_hat, df)
+    p = stats.distributions.chi2.sf(C_hat, df)
 
     TestResult = namedtuple('HosmerLemeshowTest', ('C_hat', 'df', 'p'))
     return TestResult(C_hat, df, p)
