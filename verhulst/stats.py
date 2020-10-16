@@ -114,7 +114,7 @@ def pearson_chisquare(X, y_true, y_pred):
 
     chisquare = np.sum(np.square(r))
     df = len(y_true) - (p + 1)
-    p = scipy.stats.chisqprob(chisquare, df)
+    p = stats.distributions.chi2.sf(chisquare, df)
 
     TestResult = namedtuple('PearsonChiSquare', ('chisquare', 'df', 'p'))
     return TestResult(chisquare, df, p)
@@ -168,7 +168,7 @@ def deviance(X, y_true, y_pred):
 
     D = np.sum(np.square(d))
     df = len(y_true) - (p + 1)
-    p = scipy.stats.chisqprob(D, df)
+    p = stats.distributions.chi2.sf(D, df)
 
     TestResult = namedtuple('Deviance', ('D', 'df', 'p'))
     return TestResult(D, df, p)
@@ -342,7 +342,7 @@ def osius_rojek_test(X, y_true, y_pred):
 
     df = len(y_true) - (2 + 1)  # ``p`` = 2 for binary logistic regression
     z = (chisquare - df) / np.sqrt(A + residuals)
-    p = scipy.stats.chisqprob(z, df)
+    p = stats.distributions.chi2.sf(z, df)
 
     TestResult = namedtuple('OsiusRojekTest', ('z', 'df', 'p'))
     return TestResult(z, df, p)
